@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
+using Newtonsoft.Json;
+using Movies.Client.Models;
 
 namespace Movies.Client.Services
 {
@@ -25,6 +27,7 @@ namespace Movies.Client.Services
             var response = await _httpClient.GetAsync("api/movies");
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync();
+            var movies = JsonConvert.DeserializeObject<IEnumerable<Movie>>(content);
         }
     }
 }
