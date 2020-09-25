@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using Newtonsoft.Json;
 using Movies.Client.Models;
+using System.Net.Http.Headers;
 
 namespace Movies.Client.Services
 {
@@ -16,6 +17,11 @@ namespace Movies.Client.Services
         {
             _httpClient.BaseAddress = new Uri("http://localhost:57863");
             _httpClient.Timeout = new TimeSpan(0, 0, 30);
+            _httpClient.DefaultRequestHeaders.Clear(); // We don't know if other parts of code set this, so best just to clear
+            _httpClient.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+            _httpClient.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/xml"));
         }
         public async Task Run()
         {
