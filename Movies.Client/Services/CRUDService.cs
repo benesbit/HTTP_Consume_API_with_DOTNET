@@ -24,6 +24,7 @@ namespace Movies.Client.Services
         {
             var response = await _httpClient.GetAsync("api/movies");
             response.EnsureSuccessStatusCode();
+            var content = await response.Content.ReadAsStringAsync();
         }
     }
 }
