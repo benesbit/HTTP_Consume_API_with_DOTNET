@@ -100,6 +100,10 @@ namespace Movies.Client.Services
 
         public async Task TestGetPosterWithoutStream()
         {
+
+            // warmup request
+            await GetPosterWithoutStream();
+
             // start stopwatch
             var stopWatch = Stopwatch.StartNew();
 
