@@ -17,7 +17,13 @@ namespace Movies.Client.Services
         }
         public async Task Run()
         {
-        
+            await GetResource();
+        }
+
+        public async Task GetResource()
+        {
+            var response = await _httpClient.GetAsync("api/movies");
+            response.EnsureSuccessStatusCode();
         }
     }
 }
