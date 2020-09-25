@@ -69,7 +69,7 @@ namespace Movies.Client.Services
                 Description = "A case of mistaken identity puts a man named Slevin (Josh Hartnett)" +
                     "in the middle of a war between two rival New York crime lords: The Rabbi " +
                     "(Ben Kingsley) and the Boss (Morgan Freeman).",
-                DirectorId = Guid.Parse("d28888e9-2ba9-473a-a40f-e38cb54f9b35"),
+                DirectorId = Guid.Parse("d28888e9-2ba9-473a-a40f-e38cb54f9b35"), // No idea what this line is
                 ReleaseDate = new DateTimeOffset(new DateTime(2006, 4, 7)),
                 Genre = "Crime Thriller, Mystery"
             };
