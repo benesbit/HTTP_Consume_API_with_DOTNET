@@ -17,6 +17,7 @@ namespace Movies.Client.Services
 
         public CRUDService()
         {
+            // set up HttpClient instance
             _httpClient.BaseAddress = new Uri("http://localhost:57863");
             _httpClient.Timeout = new TimeSpan(0, 0, 30);
             _httpClient.DefaultRequestHeaders.Clear(); // We don't know if other parts of code set this, so best just to clear
