@@ -29,7 +29,8 @@ namespace Movies.Client.Services
         public async Task Run()
         {
             //await GetResource();
-            await GetResourceThroughHttpRequestMessage();
+            //await GetResourceThroughHttpRequestMessage();
+            await CreateResource();
         }
 
         public async Task GetResource()
@@ -69,7 +70,7 @@ namespace Movies.Client.Services
                 Description = "A case of mistaken identity puts a man named Slevin (Josh Hartnett)" +
                     "in the middle of a war between two rival New York crime lords: The Rabbi " +
                     "(Ben Kingsley) and the Boss (Morgan Freeman).",
-                DirectorId = Guid.Parse("d28888e9-2ba9-473a-a40f-e38cb54f9b35"), // No idea what this line is
+                DirectorId = Guid.Parse("d28888e9-2ba9-473a-a40f-e38cb54f9b35"), // ID for Quentin Tarantino, not sure how this is setup but its dummy data for now
                 ReleaseDate = new DateTimeOffset(new DateTime(2006, 4, 7)),
                 Genre = "Crime Thriller, Mystery"
             };
