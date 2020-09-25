@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -95,6 +96,23 @@ namespace Movies.Client.Services
 
             var content = await response.Content.ReadAsStringAsync();
             var posters = JsonConvert.DeserializeObject<Poster>(content);
+        }
+
+        public async Task TestGetPosterWithoutStream()
+        {
+            // start stopwatch
+            var stopWatch = Stopwatch.StartNew();
+
+            // run requests
+            for (int i = 0; i < 200; ++i)
+            {
+                await GetPosterWithoutStream();
+            }
+
+            // stop stopwatch
+            stopWatch.Stop();
+            Console.WriteLine($"Elapsed milliseconds without stream: {stopWatch.ElapsedMilliseconds}, " +
+                $"averaging {stopWatch.ElapsedMilliseconds / 200} milliseconds/request");
         }
     }
 }
