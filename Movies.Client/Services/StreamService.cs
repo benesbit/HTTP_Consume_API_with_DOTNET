@@ -82,5 +82,19 @@ namespace Movies.Client.Services
                 //}
             }
         }
+
+        private async Task GetPosterWithoutStream()
+        {
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                $"api/movies/d8663e5e-7494-4f81-8739-6e0de1bea7ee/posters/{Guid.NewGuid()}");
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var response = await _httpClient.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            var content = await response.Content.ReadAsStringAsync();
+            var posters = JsonConvert.DeserializeObject<Poster>(content);
+        }
     }
 }
