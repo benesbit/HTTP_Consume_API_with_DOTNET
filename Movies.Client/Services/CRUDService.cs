@@ -30,7 +30,8 @@ namespace Movies.Client.Services
         {
             //await GetResource();
             //await GetResourceThroughHttpRequestMessage();
-            await CreateResource();
+            //await CreateResource();
+            await UpdateResource();
         }
 
         public async Task GetResource()
@@ -104,7 +105,7 @@ namespace Movies.Client.Services
             var serializedMovieToUpdate = JsonConvert.SerializeObject(movieToUpdate);
 
             var request = new HttpRequestMessage(HttpMethod.Put,
-                "api/movies/bd52674c-6875-4b08-7bb6-08d86181f6f2");  // I got this ID from running the CreateResouce with a breakpoint to copy the ID
+                "api/movies/5b1c2b4d-48c7-402a-80c3-cc796ad49c6b");
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             request.Content = new StringContent(serializedMovieToUpdate);
             request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
