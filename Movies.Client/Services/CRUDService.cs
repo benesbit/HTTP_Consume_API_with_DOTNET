@@ -28,7 +28,8 @@ namespace Movies.Client.Services
         }
         public async Task Run()
         {
-            await GetResource();
+            //await GetResource();
+            await GetResourceThroughHttpRequestMessage();
         }
 
         public async Task GetResource()
@@ -46,6 +47,18 @@ namespace Movies.Client.Services
                 var serializer = new XmlSerializer(typeof(List<Movie>));
                 movies = (List<Movie>)serializer.Deserialize(new StringReader(content));
             }
+        }
+
+        public async Task GetResourceThroughHttpRequestMessage()
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, "api/movies");
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            var response = await _httpClient.SendAsync(request);
+
+            response.EnsureSuccessStatusCode();
+
+            var content = await response.Content.ReadAsStringAsync();
+            var movies = JsonConvert.DeserializeObject<List<Movie>>(content);
         }
     }
 }
