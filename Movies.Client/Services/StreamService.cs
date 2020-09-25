@@ -118,5 +118,25 @@ namespace Movies.Client.Services
             Console.WriteLine($"Elapsed milliseconds without stream: {stopWatch.ElapsedMilliseconds}, " +
                 $"averaging {stopWatch.ElapsedMilliseconds / 200} milliseconds/request");
         }
+
+        public async Task TestGetPosterWithStream()
+        {
+            // warmup
+            await GetPosterWithStream();
+
+            // start stopwatch
+            var stopWatch = Stopwatch.StartNew();
+
+            // run requests
+            for (int i = 0; i < 200; ++i)
+            {
+                await GetPosterWithStream();
+            }
+
+            // stop stopwatch
+            stopWatch.Stop();
+            Console.WriteLine($"Elapsed milliseconds with stream: {stopWatch.ElapsedMilliseconds}, " +
+                $"averaging {stopWatch.ElapsedMilliseconds / 200} milliseconds/request");
+        }
     }
 }
