@@ -89,5 +89,31 @@ namespace Movies.Client.Services
             var content = await response.Content.ReadAsStringAsync();
             var createdMovie = JsonConvert.DeserializeObject<Movie>(content);
         }
+
+        private async Task UpdateResource()
+        {
+            var movieToUpdate = new MovieForUpdate()
+            {
+                Title = "Lucky Number Slevin",
+                Description = "A movie containing a Kansas City Shuffle",
+                DirectorId = Guid.Parse("d28888e9-2ba9-473a-a40f-e38cb54f9b35"), // ID for Quentin Tarantino, not sure how this is setup but its dummy data for now
+                ReleaseDate = new DateTimeOffset(new DateTime(2006, 4, 7)),
+                Genre = "Crime Thriller, Mystery"
+            };
+
+            var serializedMovieToUpdate = JsonConvert.SerializeObject(movieToUpdate);
+
+            var request = new HttpRequestMessage(HttpMethod.Put,
+                "api/movies/bd52674c-6875-4b08-7bb6-08d86181f6f2");  // I got this ID from running the CreateResouce with a breakpoint to copy the ID
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            request.Content = new StringContent(serializedMovieToUpdate);
+            request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            var response = await _httpClient.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            var content = await response.Content.ReadAsStringAsync();
+            var updateMovie = JsonConvert.DeserializeObject<Movie>(content);
+        }
     }
 }
