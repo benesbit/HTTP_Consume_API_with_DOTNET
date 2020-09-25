@@ -1,0 +1,11 @@
+C:\httpclient-consume-apis-dotnet-core\02\demos\start\Movies.Client\bin\Debug\netcoreapp2.1\Movies.Client.deps.json
+C:\httpclient-consume-apis-dotnet-core\02\demos\start\Movies.Client\bin\Debug\netcoreapp2.1\Movies.Client.runtimeconfig.json
+C:\httpclient-consume-apis-dotnet-core\02\demos\start\Movies.Client\bin\Debug\netcoreapp2.1\Movies.Client.runtimeconfig.dev.json
+C:\httpclient-consume-apis-dotnet-core\02\demos\start\Movies.Client\bin\Debug\netcoreapp2.1\Movies.Client.dll
+C:\httpclient-consume-apis-dotnet-core\02\demos\start\Movies.Client\bin\Debug\netcoreapp2.1\Movies.Client.pdb
+C:\httpclient-consume-apis-dotnet-core\02\demos\start\Movies.Client\obj\Debug\netcoreapp2.1\Movies.Client.csprojAssemblyReference.cache
+C:\httpclient-consume-apis-dotnet-core\02\demos\start\Movies.Client\obj\Debug\netcoreapp2.1\Movies.Client.csproj.CoreCompileInputs.cache
+C:\httpclient-consume-apis-dotnet-core\02\demos\start\Movies.Client\obj\Debug\netcoreapp2.1\Movies.Client.AssemblyInfoInputs.cache
+C:\httpclient-consume-apis-dotnet-core\02\demos\start\Movies.Client\obj\Debug\netcoreapp2.1\Movies.Client.AssemblyInfo.cs
+C:\httpclient-consume-apis-dotnet-core\02\demos\start\Movies.Client\obj\Debug\netcoreapp2.1\Movies.Client.dll
+C:\httpclient-consume-apis-dotnet-core\02\demos\start\Movies.Client\obj\Debug\netcoreapp2.1\Movies.Client.pdb
