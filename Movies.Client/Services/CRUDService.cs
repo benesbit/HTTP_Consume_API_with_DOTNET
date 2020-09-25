@@ -6,6 +6,8 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using Movies.Client.Models;
 using System.Net.Http.Headers;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace Movies.Client.Services
 {
@@ -33,7 +35,16 @@ namespace Movies.Client.Services
             var response = await _httpClient.GetAsync("api/movies");
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync();
-            var movies = JsonConvert.DeserializeObject<IEnumerable<Movie>>(content);
+            var movies = new List<Movie>();
+            if (response.Content.Headers.ContentType.MediaType == "application/json")
+            {
+                movies = JsonConvert.DeserializeObject<List<Movie>>(content);
+            }
+            else if (response.Content.Headers.ContentType.MediaType == "application/xml")
+            {
+                var serializer = new XmlSerializer(typeof(List<Movie>));
+                movies = (List<Movie>)serializer.Deserialize(new StringReader(content));
+            }
         }
     }
 }
