@@ -60,5 +60,33 @@ namespace Movies.Client.Services
             var content = await response.Content.ReadAsStringAsync();
             var movies = JsonConvert.DeserializeObject<List<Movie>>(content);
         }
+
+        public async Task CreateResource()
+        {
+            var movieToCreate = new MovieForCreation()
+            {
+                Title = "Lucky Number Slevin",
+                Description = "A case of mistaken identity puts a man named Slevin (Josh Hartnett)" +
+                    "in the middle of a war between two rival New York crime lords: The Rabbi " +
+                    "(Ben Kingsley) and the Boss (Morgan Freeman).",
+                DirectorId = Guid.Parse("d28888e9-2ba9-473a-a40f-e38cb54f9b35"),
+                ReleaseDate = new DateTimeOffset(new DateTime(2006, 4, 7)),
+                Genre = "Crime Thriller, Mystery"
+            };
+
+            var serializedMovieToCreate = JsonConvert.SerializeObject(movieToCreate);
+
+            var request = new HttpRequestMessage(HttpMethod.Post, "api/movies");
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            request.Content = new StringContent(serializedMovieToCreate);
+            request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            var response = await _httpClient.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            var content = await response.Content.ReadAsStringAsync();
+            var createdMovie = JsonConvert.DeserializeObject<Movie>(content);
+        }
     }
 }
