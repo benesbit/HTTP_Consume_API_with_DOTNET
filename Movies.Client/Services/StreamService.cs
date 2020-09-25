@@ -40,17 +40,18 @@ namespace Movies.Client.Services
                 response.EnsureSuccessStatusCode();
 
                 var stream = await response.Content.ReadAsStreamAsync();
+                var poster = stream.ReadAndDeserializeFromJson<Poster>();
 
-                using (var streamReader = new StreamReader(stream))
-                {
-                    using (var jsonTextReader = new JsonTextReader(streamReader))
-                    {
-                        var jsonSerializer = new JsonSerializer();
-                        var poster = jsonSerializer.Deserialize<Poster>(jsonTextReader);
+                //using (var streamReader = new StreamReader(stream))
+                //{
+                //    using (var jsonTextReader = new JsonTextReader(streamReader))
+                //    {
+                //        var jsonSerializer = new JsonSerializer();
+                //        var poster = jsonSerializer.Deserialize<Poster>(jsonTextReader);
 
-                        // Do something with the poster
-                    }
-                }
+                //        // Do something with the poster
+                //    }
+                //}
             }
         }
 
@@ -67,17 +68,18 @@ namespace Movies.Client.Services
                 response.EnsureSuccessStatusCode();
 
                 var stream = await response.Content.ReadAsStreamAsync();
+                var poster = stream.ReadAndDeserializeFromJson<Poster>();
 
-                using (var streamReader = new StreamReader(stream))
-                {
-                    using (var jsonTextReader = new JsonTextReader(streamReader))
-                    {
-                        var jsonSerializer = new JsonSerializer();
-                        var poster = jsonSerializer.Deserialize<Poster>(jsonTextReader);
+                //using (var streamReader = new StreamReader(stream))
+                //{
+                //    using (var jsonTextReader = new JsonTextReader(streamReader))
+                //    {
+                //        var jsonSerializer = new JsonSerializer();
+                //        var poster = jsonSerializer.Deserialize<Poster>(jsonTextReader);
 
-                        // Do something with the poster
-                    }
-                }
+                //        // Do something with the poster
+                //    }
+                //}
             }
         }
     }
