@@ -31,7 +31,8 @@ namespace Movies.Client.Services
             //await GetResource();
             //await GetResourceThroughHttpRequestMessage();
             //await CreateResource();
-            await UpdateResource();
+            //await UpdateResource();
+            await DeleteResource();
         }
 
         public async Task GetResource()
@@ -115,6 +116,18 @@ namespace Movies.Client.Services
 
             var content = await response.Content.ReadAsStringAsync();
             var updateMovie = JsonConvert.DeserializeObject<Movie>(content);
+        }
+
+        private async Task DeleteResource()
+        {
+            var request = new HttpRequestMessage(HttpMethod.Delete,
+                "api/movies/5b1c2b4d-48c7-402a-80c3-cc796ad49c6b");
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/jason"));
+
+            var response = await _httpClient.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            var content = await response.Content.ReadAsStringAsync();
         }
     }
 }
