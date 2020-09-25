@@ -31,7 +31,7 @@ namespace Movies.API
 
                 // Add XML formatters
                 options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
-                options.inputformatters.add(new xmlserializerinputformatter(options));
+                options.InputFormatters.Add(new XmlSerializerInputFormatter(options));
 
                 // Set XML as default format instead of JSON - the first formatter in the 
                 // list is the default, so we insert the input/output formatters at 
