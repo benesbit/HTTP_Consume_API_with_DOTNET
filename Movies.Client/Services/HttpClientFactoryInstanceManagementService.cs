@@ -12,7 +12,8 @@ namespace Movies.Client.Services
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         public async Task Run()
         {
-            await TestDisposeHttpClient(_cancellationTokenSource.Token);
+            //await TestDisposeHttpClient(_cancellationTokenSource.Token);
+            await TestReuseHttpClient(_cancellationTokenSource.Token);
         }
 
         private async Task TestDisposeHttpClient(CancellationToken cancellationToken)
