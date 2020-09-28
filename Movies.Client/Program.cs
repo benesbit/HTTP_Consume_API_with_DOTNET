@@ -54,7 +54,7 @@ namespace Movies.Client
                 loggingBuilder.AddDebug();
             });
 
-            serviceCollection.AddHttpClient("Movies Client", client =>
+            serviceCollection.AddHttpClient("MoviesClient", client =>
             {
                 client.BaseAddress = new Uri("http://localhost:57863");
                 client.Timeout = new TimeSpan(0, 0, 30);
