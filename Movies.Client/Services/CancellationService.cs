@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Movies.Client.Models;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Marvin.StreamExtensions;
 
 namespace Movies.Client.Services
 {
@@ -35,6 +37,15 @@ namespace Movies.Client.Services
 
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             request.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
+
+            using (var response = await _httpClient.SendAsync(request,
+                HttpCompletionOption.ResponseHeadersRead))
+            {
+                var stream = await response.Content.ReadAsStreamAsync();
+
+                response.EnsureSuccessStatusCode();
+                var trailer = stream.ReadAndDeserializeFromJson<Trailer>();
+            }
         }
     }
 }
