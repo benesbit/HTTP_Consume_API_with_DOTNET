@@ -54,7 +54,12 @@ namespace Movies.Client
                 loggingBuilder.AddDebug();
             });
 
-            serviceCollection.AddHttpClient();
+            serviceCollection.AddHttpClient("Movies Client", client =>
+            {
+                client.BaseAddress = new Uri("http://localhost:57863");
+                client.Timeout = new TimeSpan(0, 0, 30);
+                client.DefaultRequestHeaders.Clear();
+            });
 
             // register the integration service on our container with a 
             // scoped lifetime
