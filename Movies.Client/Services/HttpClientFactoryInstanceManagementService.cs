@@ -25,7 +25,8 @@ namespace Movies.Client.Services
         {
             //await TestDisposeHttpClient(_cancellationTokenSource.Token);
             //await TestReuseHttpClient(_cancellationTokenSource.Token);
-            await GetMoviesWithHttpClientFromFactory(_cancellationTokenSource.Token);
+            //await GetMoviesWithHttpClientFromFactory(_cancellationTokenSource.Token);
+            await GetMoviesWithNamedHttpClientFromFactory(_cancellationTokenSource.Token);
         }
 
         private async Task TestDisposeHttpClient(CancellationToken cancellationToken)
