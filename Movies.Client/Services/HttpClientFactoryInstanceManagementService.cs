@@ -37,5 +37,27 @@ namespace Movies.Client.Services
                 }
             }
         }
+
+        private async Task TestReuseHttpClient(CancellationToken cancellationToken)
+        {
+            var httpClient = new HttpClient();
+
+            for (var i = 0; i < 10; ++i)
+            {
+                var request = new HttpRequestMessage(
+                        HttpMethod.Get,
+                        "https://www.google.com");
+
+                using (var response = await httpClient.SendAsync(request,
+                    HttpCompletionOption.ResponseHeadersRead,
+                    cancellationToken))
+                {
+                    var stream = await response.Content.ReadAsStreamAsync();
+                    response.EnsureSuccessStatusCode();
+
+                    Console.WriteLine($"Request completed with status code <{response.StatusCode}>");
+                }
+            }
+        }
     }
 }
