@@ -54,6 +54,7 @@ namespace Movies.Client
                 loggingBuilder.AddDebug();
             });
 
+            // Named
             serviceCollection.AddHttpClient("MoviesClient", client =>
             {
                 client.BaseAddress = new Uri("http://localhost:57863");
@@ -66,6 +67,7 @@ namespace Movies.Client
                 AutomaticDecompression = System.Net.DecompressionMethods.GZip
             });
 
+            // Typed
             serviceCollection.AddHttpClient<MoviesClient>(client =>
             {
                 client.BaseAddress = new Uri("http://localhost:57863");
