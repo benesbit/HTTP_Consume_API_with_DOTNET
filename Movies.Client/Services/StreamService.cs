@@ -124,6 +124,18 @@ namespace Movies.Client.Services
             {
                 request.Headers.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json")); // Best practice
+
+                using (var streamContent = new StreamContent(memoryContentStream))
+                {
+                    request.Content = streamContent;
+                    request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                    var response = await _httpClient.SendAsync(request);
+                    response.EnsureSuccessStatusCode();
+
+                    var createdContent = await response.Content.ReadAsStringAsync();
+                    var createdPoster = JsonConvert.DeserializeObject<Poster>(createdContent);
+                }
             }
         }
 
