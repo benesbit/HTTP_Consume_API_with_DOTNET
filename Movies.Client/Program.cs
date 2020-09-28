@@ -54,6 +54,8 @@ namespace Movies.Client
                 loggingBuilder.AddDebug();
             });
 
+            serviceCollection.AddHttpClient();
+
             // register the integration service on our container with a 
             // scoped lifetime
 
