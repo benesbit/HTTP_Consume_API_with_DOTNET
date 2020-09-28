@@ -1,7 +1,11 @@
-﻿using System;
+﻿using Movies.Client.Models;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Movies.Client
 {
@@ -15,6 +19,15 @@ namespace Movies.Client
             Client.BaseAddress = new Uri("http://localhost:57863");
             Client.Timeout = new TimeSpan(0, 0, 30);
             Client.DefaultRequestHeaders.Clear();
+        }
+
+        public async Task<IEnumerable<Movie>> GetMovies(CancellationToken cancellationToken)
+        {
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                "api/movies");
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            request.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
         }
     }
 }
