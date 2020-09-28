@@ -28,6 +28,7 @@ namespace Movies.Client.Services
 
         public async Task Run()
         {
+            await GetTrailerAndCancel();
         }
 
         private async Task GetTrailerAndCancel()
