@@ -32,7 +32,9 @@ namespace Movies.Client.Services
             //await TestGetPosterWithStream();
             //await TestGetPosterWithStreamAndCompletionMode();
             //await PostPosterWithStream();
-            await PostAndReadPosterWithStreams();
+            //await PostAndReadPosterWithStreams();
+            //await TestPostPosterWithoutStream();
+            await GetPosterWithGZipCompression();
         }
         
         private async Task GetPosterWithStream()
@@ -184,6 +186,72 @@ namespace Movies.Client.Services
                     }
                 }
             }
+        }
+
+        private async Task PostPosterWithoutStream()
+        {
+            // generate a movie poster of 500KB
+            var random = new Random();
+            var generatedBytes = new byte[524288];
+            random.NextBytes(generatedBytes);
+
+            var posterForCreation = new PosterForCreation()
+            {
+                Name = "A new poster for the Big Lebowski",
+                Bytes = generatedBytes
+            };
+
+            var serializedPosterForCreation = JsonConvert.SerializeObject(posterForCreation);
+
+
+            var request = new HttpRequestMessage(HttpMethod.Post,
+                $"api/movies/d8663e5e-7494-4f81-8739-6e0de1bea7ee/posters");
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            request.Content = new StringContent(serializedPosterForCreation);
+            request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            var response = await _httpClient.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            var content = await response.Content.ReadAsStringAsync();
+            var createdMovie = JsonConvert.DeserializeObject<Poster>(content);
+        }
+
+        private async Task GetPosterWithGZipCompression()
+        {
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                $"api/movies/d8663e5e-7494-4f81-8739-6e0de1bea7ee/posters/{Guid.NewGuid()}");
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            request.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
+
+            using (var response = await _httpClient.SendAsync(request))
+            {
+                response.EnsureSuccessStatusCode();
+
+                var stream = await response.Content.ReadAsStreamAsync();
+                var poster = stream.ReadAndDeserializeFromJson<Poster>();
+            }
+        }
+
+        private async Task TestPostPosterWithoutStream()
+        {
+            // warmup
+            await PostPosterWithoutStream();
+
+            // start stopwatch
+            var stopWatch = Stopwatch.StartNew();
+
+            // run requests
+            for (int i = 0; i < 200; ++i)
+            {
+                await PostPosterWithoutStream();
+            }
+
+            // stop stopwatch
+            stopWatch.Stop();
+            Console.WriteLine($"Elapsed milliseconds without stream: {stopWatch.ElapsedMilliseconds}, " +
+                $"averaging {stopWatch.ElapsedMilliseconds / 200} milliseconds/request");
         }
 
         public async Task TestGetPosterWithoutStream()
