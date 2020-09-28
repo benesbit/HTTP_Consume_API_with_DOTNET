@@ -116,6 +116,15 @@ namespace Movies.Client.Services
 
             var memoryContentStream = new MemoryStream();
             memoryContentStream.SerializeToJsonAndWrite(posterForCreation);
+
+            memoryContentStream.Seek(0, SeekOrigin.Begin);
+            using (var request = new HttpRequestMessage(
+                HttpMethod.Post,
+                $"api/movies/d8663e5e-7494-4f81-8739-6e0de1bea7ee/posters"))
+            {
+                request.Headers.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+            }
         }
 
         public async Task TestGetPosterWithoutStream()
