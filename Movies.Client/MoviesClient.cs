@@ -12,6 +12,9 @@ namespace Movies.Client
         public MoviesClient(HttpClient client)
         {
             Client = client;
+            Client.BaseAddress = new Uri("http://localhost:57863");
+            Client.Timeout = new TimeSpan(0, 0, 30);
+            Client.DefaultRequestHeaders.Clear();
         }
     }
 }
