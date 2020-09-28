@@ -102,7 +102,7 @@ namespace Movies.Client.Services
             var posters = JsonConvert.DeserializeObject<Poster>(content);
         }
 
-        private async Task PostPosterWithStream()
+        private async Task PostAndReadPosterWithStreams()
         {
             // Generate a movie poster of 500KB
             var random = new Random();
@@ -131,11 +131,13 @@ namespace Movies.Client.Services
                     request.Content = streamContent;
                     request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-                    var response = await _httpClient.SendAsync(request);
-                    response.EnsureSuccessStatusCode();
-
-                    var createdContent = await response.Content.ReadAsStringAsync();
-                    var createdPoster = JsonConvert.DeserializeObject<Poster>(createdContent);
+                    using (var response = await _httpClient
+                        .SendAsync(request, HttpCompletionOption.ResponseHeadersRead))
+                    {
+                        response.EnsureSuccessStatusCode();
+                        var stream = await response.Content.ReadAsStreamAsync();
+                        var poster = stream.ReadAndDeserializeFromJson<Poster>();
+                    }
                 }
             }
         }
