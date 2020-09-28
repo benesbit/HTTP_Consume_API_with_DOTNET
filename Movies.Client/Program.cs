@@ -44,11 +44,15 @@ namespace Movies.Client
         private static void ConfigureServices(IServiceCollection serviceCollection)
         {
             // add loggers           
-            serviceCollection.AddSingleton(new LoggerFactory()
-                  .AddConsole()
-                  .AddDebug());
+            //serviceCollection.AddSingleton(new LoggerFactory()
+            //      .AddConsole()
+            //      .AddDebug());
 
-            serviceCollection.AddLogging();
+            serviceCollection.AddLogging(loggingBuilder =>
+            {
+                loggingBuilder.AddConsole();
+                loggingBuilder.AddDebug();
+            });
 
             // register the integration service on our container with a 
             // scoped lifetime
