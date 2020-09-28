@@ -1,4 +1,5 @@
-﻿using Movies.Client.Models;
+﻿using Marvin.StreamExtensions;
+using Movies.Client.Models;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -28,6 +29,15 @@ namespace Movies.Client
                 "api/movies");
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             request.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
+
+            using (var response = await Client.SendAsync(request,
+                HttpCompletionOption.ResponseHeadersRead,
+                cancellationToken))
+            {
+                var stream = await response.Content.ReadAsStreamAsync();
+                response.EnsureSuccessStatusCode();
+                return stream.ReadAndDeserializeFromJson<List<Movie>>();
+            }
         }
     }
 }
