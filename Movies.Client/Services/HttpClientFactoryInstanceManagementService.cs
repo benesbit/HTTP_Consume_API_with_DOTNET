@@ -78,23 +78,28 @@ namespace Movies.Client.Services
             }
         }
 
-        private async Task GetMoviesWithTypedHttpClientFromFactory(
-            CancellationToken cancellationToken)
-        {
-            var request = new HttpRequestMessage(
-                HttpMethod.Get,
-                "api/movies");
-            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            request.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
+        //private async Task GetMoviesWithTypedHttpClientFromFactory(
+        //    CancellationToken cancellationToken)
+        //{
+        //    var request = new HttpRequestMessage(
+        //        HttpMethod.Get,
+        //        "api/movies");
+        //    request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        //    request.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
 
-            using (var response = await _moviesClient.Client.SendAsync(request,
-                HttpCompletionOption.ResponseHeadersRead,
-                cancellationToken))
-            {
-                var stream = await response.Content.ReadAsStreamAsync();
-                response.EnsureSuccessStatusCode();
-                var movies = stream.ReadAndDeserializeFromJson<List<Movie>>();
-            }
+        //    using (var response = await _moviesClient.Client.SendAsync(request,
+        //        HttpCompletionOption.ResponseHeadersRead,
+        //        cancellationToken))
+        //    {
+        //        var stream = await response.Content.ReadAsStreamAsync();
+        //        response.EnsureSuccessStatusCode();
+        //        var movies = stream.ReadAndDeserializeFromJson<List<Movie>>();
+        //    }
+        //}
+
+        private async Task GetMoviesViaMoviesClient(CancellationToken cancellationToken)
+        {
+            var movies = await _moviesClient.GetMovies(cancellationToken);
         }
 
         private async Task GetMoviesWithNamedHttpClientFromFactory(
