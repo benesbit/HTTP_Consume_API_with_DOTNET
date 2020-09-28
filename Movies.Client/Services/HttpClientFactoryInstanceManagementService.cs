@@ -10,6 +10,14 @@ namespace Movies.Client.Services
     public class HttpClientFactoryInstanceManagementService : IIntegrationService
     {
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+
+        private readonly IHttpClientFactory _httpClientFactory;
+
+        public HttpClientFactoryInstanceManagementService(IHttpClientFactory httpClientFactory)
+        {
+            _httpClientFactory = httpClientFactory;
+        }
+
         public async Task Run()
         {
             //await TestDisposeHttpClient(_cancellationTokenSource.Token);
