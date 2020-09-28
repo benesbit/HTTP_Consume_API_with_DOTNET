@@ -15,10 +15,13 @@ namespace Movies.Client.Services
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
         private readonly IHttpClientFactory _httpClientFactory;
+        private readonly MoviesClient _moviesClient;
 
-        public HttpClientFactoryInstanceManagementService(IHttpClientFactory httpClientFactory)
+        public HttpClientFactoryInstanceManagementService(IHttpClientFactory httpClientFactory,
+            MoviesClient moviesClient)
         {
             _httpClientFactory = httpClientFactory;
+            _moviesClient = moviesClient;
         }
 
         public async Task Run()
