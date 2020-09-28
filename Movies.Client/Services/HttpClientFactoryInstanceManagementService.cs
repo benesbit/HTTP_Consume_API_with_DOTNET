@@ -93,24 +93,24 @@ namespace Movies.Client.Services
             }
         }
 
-        //private async Task GetMoviesWithHttpClientFromFactory(
-        //    CancellationToken cancellationToken)
-        //{
-        //    var httpClient = _httpClientFactory.CreateClient();
+        private async Task GetMoviesWithHttpClientFromFactory(
+            CancellationToken cancellationToken)
+        {
+            var httpClient = _httpClientFactory.CreateClient();
 
-        //    var request = new HttpRequestMessage(
-        //        HttpMethod.Get,
-        //        "http://localhost:57863/api/movies");
-        //    request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost:57863/api/movies");
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-        //    using (var response = await httpClient.SendAsync(request,
-        //        HttpCompletionOption.ResponseHeadersRead,
-        //        cancellationToken))
-        //    {
-        //        var stream = await response.Content.ReadAsStreamAsync();
-        //        response.EnsureSuccessStatusCode();
-        //        var movies = stream.ReadAndDeserializeFromJson<List<Movie>>();
-        //    }
-        //}
+            using (var response = await httpClient.SendAsync(request,
+                HttpCompletionOption.ResponseHeadersRead,
+                cancellationToken))
+            {
+                var stream = await response.Content.ReadAsStreamAsync();
+                response.EnsureSuccessStatusCode();
+                var movies = stream.ReadAndDeserializeFromJson<List<Movie>>();
+            }
+        }
     }
 }
