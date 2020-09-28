@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Marvin.StreamExtensions;
+using Movies.Client.Models;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,7 +24,8 @@ namespace Movies.Client.Services
         public async Task Run()
         {
             //await TestDisposeHttpClient(_cancellationTokenSource.Token);
-            await TestReuseHttpClient(_cancellationTokenSource.Token);
+            //await TestReuseHttpClient(_cancellationTokenSource.Token);
+            await GetMoviesWithHttpClientFromFactory(_cancellationTokenSource.Token);
         }
 
         private async Task TestDisposeHttpClient(CancellationToken cancellationToken)
@@ -66,6 +70,26 @@ namespace Movies.Client.Services
 
                     Console.WriteLine($"Request completed with status code <{response.StatusCode}>");
                 }
+            }
+        }
+
+        private async Task GetMoviesWithHttpClientFromFactory(
+            CancellationToken cancellationToken)
+        {
+            var httpClient = _httpClientFactory.CreateClient();
+
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost:57863/api/movies");
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            using (var response = await httpClient.SendAsync(request,
+                HttpCompletionOption.ResponseHeadersRead,
+                cancellationToken))
+            {
+                var stream = await response.Content.ReadAsStreamAsync();
+                response.EnsureSuccessStatusCode();
+                var movies = stream.ReadAndDeserializeFromJson<List<Movie>>();
             }
         }
     }
