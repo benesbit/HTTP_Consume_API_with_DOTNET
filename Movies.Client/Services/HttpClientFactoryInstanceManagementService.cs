@@ -83,6 +83,7 @@ namespace Movies.Client.Services
                 HttpMethod.Get,
                 "api/movies");
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            request.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
 
             using (var response = await httpClient.SendAsync(request,
                 HttpCompletionOption.ResponseHeadersRead,
@@ -103,7 +104,6 @@ namespace Movies.Client.Services
                 HttpMethod.Get,
                 "http://localhost:57863/api/movies");
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            request.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
 
             using (var response = await httpClient.SendAsync(request,
                 HttpCompletionOption.ResponseHeadersRead,
