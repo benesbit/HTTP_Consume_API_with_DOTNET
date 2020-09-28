@@ -8,10 +8,10 @@ namespace Movies.Client
     public class MoviesClient
     {
         public HttpClient Client { get; }
-    }
 
-    public MoviesClient(HttpClient client)
-    {
-        Client = client;
+        public MoviesClient(HttpClient client)
+        {
+            Client = client;
+        }
     }
 }
