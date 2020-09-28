@@ -115,16 +115,7 @@ namespace Movies.Client.Services
             };
 
             var memoryContentStream = new MemoryStream();
-            using (var streamWriter = new StreamWriter(memoryContentStream,
-                new UTF8Encoding(), 1024, true))
-            {
-                using (var jsonTextWriter = new JsonTextWriter(streamWriter))
-                {
-                    var jsonSerializer = new JsonSerializer();
-                    jsonSerializer.Serialize(jsonTextWriter, posterForCreation);
-                    jsonTextWriter.Flush();
-                }
-            }
+            memoryContentStream.SerializeToJsonAndWrite(posterForCreation);
         }
 
         public async Task TestGetPosterWithoutStream()
