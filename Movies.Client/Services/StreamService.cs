@@ -14,8 +14,14 @@ namespace Movies.Client.Services
 {
     public class StreamService : IIntegrationService
     {
-        private static HttpClient _httpClient = new HttpClient();
-        
+        //private static HttpClient _httpClient = new HttpClient();
+
+        private static HttpClient _httpClient = new HttpClient(
+            new HttpClientHandler()
+            {
+                AutomaticDecompression = System.Net.DecompressionMethods.GZip
+            });
+
         public StreamService()
         {
             // Set up HttpClient instance
