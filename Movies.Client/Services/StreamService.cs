@@ -101,6 +101,32 @@ namespace Movies.Client.Services
             var posters = JsonConvert.DeserializeObject<Poster>(content);
         }
 
+        private async Task PostPosterWithStream()
+        {
+            // Generate a movie poster of 500KB
+            var random = new Random();
+            var generatedBytes = new byte[524288];
+            random.NextBytes(generatedBytes);
+
+            var posterForCreation = new PosterForCreation()
+            {
+                Name = "A new poster for The Big Lebowski",
+                Bytes = generatedBytes
+            };
+
+            var memoryContentStream = new MemoryStream();
+            using (var streamWriter = new StreamWriter(memoryContentStream,
+                new UTF8Encoding(), 1024, true))
+            {
+                using (var jsonTextWriter = new JsonTextWriter(streamWriter))
+                {
+                    var jsonSerializer = new JsonSerializer();
+                    jsonSerializer.Serialize(jsonTextWriter, posterForCreation);
+                    jsonTextWriter.Flush();
+                }
+            }
+        }
+
         public async Task TestGetPosterWithoutStream()
         {
 
