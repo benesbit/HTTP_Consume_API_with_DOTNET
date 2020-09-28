@@ -27,9 +27,10 @@ namespace Movies.Client.Services
         {
             //await GetPosterWithStream();
             //await GetPosterWithStreamAndCompletionMode();
-            await TestGetPosterWithoutStream();
-            await TestGetPosterWithStream();
-            await TestGetPosterWithStreamAndCompletionMode();
+            //await TestGetPosterWithoutStream();
+            //await TestGetPosterWithStream();
+            //await TestGetPosterWithStreamAndCompletionMode();
+            await PostPosterWithStream();
         }
         
         private async Task GetPosterWithStream()
