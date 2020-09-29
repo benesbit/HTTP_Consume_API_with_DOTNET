@@ -23,7 +23,8 @@ namespace Movies.Client.Services
 
         public async Task Run()
         {
-            await GetMovieAndDealWithInvalidResponses(_cancellationTokenSource.Token);
+            //await GetMovieAndDealWithInvalidResponses(_cancellationTokenSource.Token);
+            await PostMovieAndHandleValidationErrors(_cancellationTokenSource.Token);
         }
 
         private async Task GetMovieAndDealWithInvalidResponses(CancellationToken cancellationToken)
@@ -92,7 +93,21 @@ namespace Movies.Client.Services
                     HttpCompletionOption.ResponseHeadersRead,
                     cancellationToken))
                 {
-                    response.EnsureSuccessStatusCode();
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        if (response.StatusCode == System.Net.HttpStatusCode.UnprocessableEntity)
+                        {
+                            var errorStream = await response.Content.ReadAsStreamAsync();
+                            var validationErrors = errorStream.ReadAndDeserializeFromJson();
+
+                            Console.WriteLine(validationErrors);
+                            return;
+                        }
+                        else
+                        {
+                            response.EnsureSuccessStatusCode();
+                        }
+                    }
 
                     var stream = await response.Content.ReadAsStreamAsync();
                     var movie = stream.ReadAndDeserializeFromJson<Movie>();
