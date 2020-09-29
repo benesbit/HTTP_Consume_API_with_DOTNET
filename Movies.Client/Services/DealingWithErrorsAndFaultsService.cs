@@ -35,12 +35,22 @@ namespace Movies.Client.Services
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             request.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
 
-            using (var resposne = await httpClient.SendAsync(request,
+            using (var response = await httpClient.SendAsync(request,
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken))
             {
-                resposne.EnsureSuccessStatusCode();
-                var stream = await resposne.Content.ReadAsStreamAsync();
+                if(!response.IsSuccessStatusCode)
+                {
+                    // Inspect the status code
+                    if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                    {
+                        // Show this to the user
+                        Console.WriteLine("The requested movie cannot be found.");
+                        return;
+                    }
+                }
+
+                var stream = await response.Content.ReadAsStreamAsync();
 
                 var movie = stream.ReadAndDeserializeFromJson<Movie>();
             }
