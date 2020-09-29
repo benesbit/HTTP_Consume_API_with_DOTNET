@@ -3,6 +3,10 @@ using System.Net.Http;
 using Xunit;
 using Movies.Client;
 using System.Threading;
+using Moq;
+using Moq.Protected;
+using System.Threading.Tasks;
+using System.Net;
 
 namespace Movies.Test
 {
@@ -18,6 +22,22 @@ namespace Movies.Test
 
             Assert.ThrowsAsync<UnauthorizedApiAccessException>(
                 () => testableClass.GetMovie(cancellationTokenSource.Token));
+        }
+
+        [Fact]
+        public void GetMovie_On401Response_MustThrowUnauthorizedApiAccessException_WithMoq()
+        {
+            var unauthorizedResponseHttpMessageHandlerMock = new Mock<HttpMessageHandler>();
+
+            unauthorizedResponseHttpMessageHandlerMock.Protected()
+                .Setup<Task<HttpResponseMessage>>(
+                "SendAsync",
+                ItExpr.IsAny<HttpRequestMessage>(),
+                ItExpr.IsAny<CancellationToken>()
+                ).ReturnsAsync(new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.Unauthorized
+                });
         }
     }
 }
