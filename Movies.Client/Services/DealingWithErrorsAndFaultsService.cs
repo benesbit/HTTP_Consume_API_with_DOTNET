@@ -48,6 +48,11 @@ namespace Movies.Client.Services
                         Console.WriteLine("The requested movie cannot be found.");
                         return;
                     }
+                    else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                    {
+                        // Trigger a login flow
+                        return;
+                    }
                 }
 
                 var stream = await response.Content.ReadAsStreamAsync();
