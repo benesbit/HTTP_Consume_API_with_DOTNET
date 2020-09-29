@@ -1,0 +1,17 @@
+C:\httpclient-consume-apis-dotnet-core\10\demos\start\Movies.Test\bin\Debug\netcoreapp2.1\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+C:\httpclient-consume-apis-dotnet-core\10\demos\start\Movies.Test\bin\Debug\netcoreapp2.1\xunit.runner.reporters.netcoreapp10.dll
+C:\httpclient-consume-apis-dotnet-core\10\demos\start\Movies.Test\bin\Debug\netcoreapp2.1\xunit.runner.utility.netcoreapp10.dll
+C:\httpclient-consume-apis-dotnet-core\10\demos\start\Movies.Test\bin\Debug\netcoreapp2.1\Movies.Test.deps.json
+C:\httpclient-consume-apis-dotnet-core\10\demos\start\Movies.Test\bin\Debug\netcoreapp2.1\Movies.Test.runtimeconfig.json
+C:\httpclient-consume-apis-dotnet-core\10\demos\start\Movies.Test\bin\Debug\netcoreapp2.1\Movies.Test.runtimeconfig.dev.json
+C:\httpclient-consume-apis-dotnet-core\10\demos\start\Movies.Test\bin\Debug\netcoreapp2.1\Movies.Test.dll
+C:\httpclient-consume-apis-dotnet-core\10\demos\start\Movies.Test\bin\Debug\netcoreapp2.1\Movies.Test.pdb
+C:\httpclient-consume-apis-dotnet-core\10\demos\start\Movies.Test\bin\Debug\netcoreapp2.1\Movies.Client.dll
+C:\httpclient-consume-apis-dotnet-core\10\demos\start\Movies.Test\bin\Debug\netcoreapp2.1\Movies.Client.pdb
+C:\httpclient-consume-apis-dotnet-core\10\demos\start\Movies.Test\obj\Debug\netcoreapp2.1\Movies.Test.csprojAssemblyReference.cache
+C:\httpclient-consume-apis-dotnet-core\10\demos\start\Movies.Test\obj\Debug\netcoreapp2.1\Movies.Test.csproj.CoreCompileInputs.cache
+C:\httpclient-consume-apis-dotnet-core\10\demos\start\Movies.Test\obj\Debug\netcoreapp2.1\Movies.Test.AssemblyInfoInputs.cache
+C:\httpclient-consume-apis-dotnet-core\10\demos\start\Movies.Test\obj\Debug\netcoreapp2.1\Movies.Test.AssemblyInfo.cs
+C:\httpclient-consume-apis-dotnet-core\10\demos\start\Movies.Test\obj\Debug\netcoreapp2.1\Movies.Test.csproj.CopyComplete
+C:\httpclient-consume-apis-dotnet-core\10\demos\start\Movies.Test\obj\Debug\netcoreapp2.1\Movies.Test.dll
+C:\httpclient-consume-apis-dotnet-core\10\demos\start\Movies.Test\obj\Debug\netcoreapp2.1\Movies.Test.pdb
