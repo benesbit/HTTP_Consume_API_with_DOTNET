@@ -53,6 +53,8 @@ namespace Movies.Client.Services
                         // Trigger a login flow
                         return;
                     }
+
+                    response.EnsureSuccessStatusCode();
                 }
 
                 var stream = await response.Content.ReadAsStreamAsync();
