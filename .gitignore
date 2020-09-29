@@ -1,0 +1,5 @@
+.vs/*
+Movies.API/obj/
+Movies.Client/obj/
+Movies.API/bin/
+Movies.Client/bin/
