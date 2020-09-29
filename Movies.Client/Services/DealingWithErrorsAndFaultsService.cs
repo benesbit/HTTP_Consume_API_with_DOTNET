@@ -1,5 +1,6 @@
 ﻿using Marvin.StreamExtensions;
 using Movies.Client.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -60,6 +61,42 @@ namespace Movies.Client.Services
                 var stream = await response.Content.ReadAsStreamAsync();
 
                 var movie = stream.ReadAndDeserializeFromJson<Movie>();
+            }
+        }
+
+        private async Task PostMovieAndHandleValidationErrors(CancellationToken cancellationToken)
+        {
+            var httpClient = _httpClientFactory.CreateClient("MoviesClient");
+
+            var movieForCreation = new MovieForCreation()
+            {
+                Title = "Pulp Fiction",
+                Description = "Short",
+                DirectorId = Guid.Parse("d28888e9-2ba9-476a-a40f-e38cb54f9b35"),
+                ReleaseDate = new DateTimeOffset(new DateTime(1992, 9, 2)),
+                Genre = "Crime, Drama",
+            };
+
+            var serializedMovieForCreation = JsonConvert.SerializeObject(movieForCreation);
+
+            using (var request = new HttpRequestMessage(
+                HttpMethod.Post,
+                "api/movies"))
+            {
+                request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                request.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
+                request.Content = new StringContent(serializedMovieForCreation);
+                request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                using (var response = await httpClient.SendAsync(request,
+                    HttpCompletionOption.ResponseHeadersRead,
+                    cancellationToken))
+                {
+                    response.EnsureSuccessStatusCode();
+
+                    var stream = await response.Content.ReadAsStreamAsync();
+                    var movie = stream.ReadAndDeserializeFromJson<Movie>();
+                }
             }
         }
     }
