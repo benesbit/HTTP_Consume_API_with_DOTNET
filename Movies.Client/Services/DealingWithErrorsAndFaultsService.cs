@@ -32,7 +32,7 @@ namespace Movies.Client.Services
             var request = new HttpRequestMessage(
                 HttpMethod.Get,
                 "api/movies/030a43b0-f9a5-405a-811c-bf342524b2be");
-            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json");
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             request.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
 
             using (var resposne = await httpClient.SendAsync(request,
