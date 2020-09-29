@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Movies.Client
 {
-    class Return401UnauthorizedResponseHandler : HttpMessageHandler
+    public class Return401UnauthorizedResponseHandler : HttpMessageHandler
     {
         protected override Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request, CancellationToken cancellationToken)
