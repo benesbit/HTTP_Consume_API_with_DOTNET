@@ -15,3 +15,5 @@ C:\httpclient-consume-apis-dotnet-core\10\demos\start\Movies.Test\obj\Debug\netc
 C:\httpclient-consume-apis-dotnet-core\10\demos\start\Movies.Test\obj\Debug\netcoreapp2.1\Movies.Test.csproj.CopyComplete
 C:\httpclient-consume-apis-dotnet-core\10\demos\start\Movies.Test\obj\Debug\netcoreapp2.1\Movies.Test.dll
 C:\httpclient-consume-apis-dotnet-core\10\demos\start\Movies.Test\obj\Debug\netcoreapp2.1\Movies.Test.pdb
+C:\httpclient-consume-apis-dotnet-core\10\demos\start\Movies.Test\bin\Debug\netcoreapp2.1\testhost.exe
+C:\httpclient-consume-apis-dotnet-core\10\demos\start\Movies.Test\bin\Debug\netcoreapp2.1\testhost.dll
