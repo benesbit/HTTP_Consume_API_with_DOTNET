@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Movies.Client
 {
     [Serializable]
-    internal class UnauthorizedApiAccessException : Exception
+    public class UnauthorizedApiAccessException : Exception
     {
         public UnauthorizedApiAccessException()
         {
