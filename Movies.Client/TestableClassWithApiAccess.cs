@@ -44,7 +44,7 @@ namespace Movies.Client
                     else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                     {
                         // Trigger a login flow
-                        // TODO
+                        throw new UnauthorizedApiAccessException();
                     }
 
                     response.EnsureSuccessStatusCode();
