@@ -38,6 +38,15 @@ namespace Movies.Test
                 {
                     StatusCode = HttpStatusCode.Unauthorized
                 });
+
+            var httpClient = new HttpClient(unauthorizedResponseHttpMessageHandlerMock.Object);
+
+            var testableClass = new TestableClassWithApiAccess(httpClient);
+
+            var cancellationTokenSource = new CancellationTokenSource();
+
+            Assert.ThrowsAsync<UnauthorizedApiAccessException>(
+                () => testableClass.GetMovie(cancellationTokenSource.Token));
         }
     }
 }
